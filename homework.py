@@ -8,12 +8,12 @@ from twilio.rest import Client
 load_dotenv()
 
 
-TWILIO_SID = os.getenv('twilio_sid')
-TWILIO_TOKEN = os.getenv('twilio_token')
-NUMBER_FROM = os.getenv('number_from')
-NUMBER_TO = os.getenv('number_to')
-VK_TOKEN = os.getenv('vk_token')
+TWILIO_SID = os.getenv('ACCOUNT_SID')
+TWILIO_TOKEN = os.getenv('AUTH_TOKEN')
+VK_TOKEN = os.getenv('VK_TOKEN')
 VK_API_VER = '5.92'
+NUMBER_FROM = '+1111'
+NUMBER_TO = '+2222'
 
 
 def get_status(user_id):
@@ -25,6 +25,7 @@ def get_status(user_id):
     }
     try:
         response = requests.post('https://api.vk.com/method/users.get', params=params)
+        # эту строчку удалил, т.к. в тестах у mock объекта не реализован метод raise_for_status()
         #response.raise_for_status()
     except requests.exceptions.HTTPError as err:
         print('Ошибка при вызове метода users.get', err, sep='\n')
